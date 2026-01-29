@@ -6,6 +6,7 @@ package com.sangr.supermarket.mapper;
 
 import com.sangr.supermarket.dto.*;
 import com.sangr.supermarket.entity.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -89,17 +90,23 @@ public class Mapper {
        ======================= */
 
     public static SaleDTO toSaleDTO(Sale sale) {
+        
+        List<ProductInSaleDTO> productList = sale.getProducts().stream()
+            .map(Mapper::toProductInSaleDTO)
+            .collect(Collectors.toList());
+    
+    // Recalcular para estar 100% seguro
+    double calculatedTotal = productList.stream()
+            .mapToDouble(ProductInSaleDTO::getSubtotal)
+            .sum();
+    
         return SaleDTO.builder()
                 .id(sale.getId())
                 .date(sale.getDate())
                 .state(sale.getState())
-                .total(sale.getTotal())
+                .total(calculatedTotal)
                 .branchId(sale.getBranch().getId())
-                .prodInSale(
-                        sale.getProducts().stream()
-                                .map(Mapper::toProductInSaleDTO)
-                                .collect(Collectors.toList())
-                )
+                .prodInSale(productList)
                 .build();
     }
 

@@ -4,6 +4,7 @@
  */
 package com.sangr.supermarket.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sangr.supermarket.entity.Branch;
 import com.sangr.supermarket.entity.ProductInSale;
 import jakarta.persistence.ManyToOne;
@@ -28,6 +29,7 @@ public class SaleDTO {
     private Long id;
     private LocalDate date;
     private String state;
+    
     private double total;
     
     private List<ProductInSaleDTO> prodInSale;

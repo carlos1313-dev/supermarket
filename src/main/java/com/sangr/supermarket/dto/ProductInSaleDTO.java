@@ -4,6 +4,7 @@
  */
 package com.sangr.supermarket.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class ProductInSaleDTO {
     private double unitPrice;
 
     private String productName;
+  
     private double subtotal;
     
     //private long saleId;
